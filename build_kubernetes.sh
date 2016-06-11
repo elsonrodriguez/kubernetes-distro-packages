@@ -1,15 +1,20 @@
 #!/bin/bash
 
 K8S_VERSION=${K8S_VERSION:-1.2.0}
-rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
-rm -f kubernetes/master/kubernetes-master-$K8S_VERSION-1.x86_64.rpm
-rm -f kubernetes/master/kubernetes-node-$K8S_VERSION-1.x86_64.rpm
-rm -f kubernetes/master/kubernetes-master_$K8S_VERSION_amd64.deb
-rm -f kubernetes/master/kubernetes-node_$K8S_VERSION_amd64.deb
+K8S_CLEAN_BUILD=${K8S_CLEAN_BUILD:-false}
+
+if [[ "${K8S_CLEAN_BUILD}" != "false" ]]; then
+  rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
+  rm -f kubernetes/master/kubernetes-master-$K8S_VERSION-1.x86_64.rpm
+  rm -f kubernetes/master/kubernetes-node-$K8S_VERSION-1.x86_64.rpm
+  rm -f kubernetes/master/kubernetes-master_$K8S_VERSION_amd64.deb
+  rm -f kubernetes/master/kubernetes-node_$K8S_VERSION_amd64.deb
+fi
 
 mkdir -p kubernetes/source/kubernetes/v$K8S_VERSION
 cd kubernetes/source/kubernetes/v$K8S_VERSION
-curl -L https://storage.googleapis.com/kubernetes-release/release/v$K8S_VERSION/kubernetes.tar.gz | tar xvz
+curl -L -O https://storage.googleapis.com/kubernetes-release/release/v$K8S_VERSION/kubernetes.tar.gz -z kubernetes.tar.gz
+tar -xvzf kubernetes.tar.gz
 # Nightly
 # https://github.com/GoogleCloudPlatform/kubernetes/releases/download/v$K8S_VERSION/kubernetes.tar.gz
 tar xfvz kubernetes/server/kubernetes-server-linux-amd64.tar.gz
