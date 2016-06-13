@@ -1,7 +1,7 @@
 #!/bin/bash
 
 K8S_VERSION=${K8S_VERSION:-1.2.0}
-K8S_CLEAN_BUILD=${K8S_CLEAN_BUILD:-false}
+K8S_CLEAN_BUILD=${K8S_CLEAN_BUILD:-true}
 
 if [[ "${K8S_CLEAN_BUILD}" != "false" ]]; then
   rm -rf kubernetes/source/kubernetes/v$K8S_VERSION
