@@ -8,7 +8,6 @@ DAEMON_ARGS="$DAEMON_ARGS
 --allow_privileged=False \
 --kubelet_port=10250 \
 --admission_control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota \
---service_account_key_file=/srv/kubernetes/kube-serviceaccount.key \
---cluster_name=kubernetes"
+--service_account_key_file=/srv/kubernetes/kube-serviceaccount.key"
 
 #--tls_cert_file=/srv/kubernetes/server.cert --tls_private_key_file=/srv/kubernetes/server.key --secure_port=6443 --token_auth_file=/srv/kubernetes/known_tokens.csv
