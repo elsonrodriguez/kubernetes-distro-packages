@@ -1,5 +1,5 @@
 DAEMON_ARGS="--address=127.0.0.1 \
---api_servers=master:8080 \
+--api_servers=127.0.0.1:8080 \
 --port=10250 \
 --v=2 \
 --container-runtime="docker" \

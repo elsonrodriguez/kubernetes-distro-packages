@@ -60,6 +60,8 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
 etc/kubernetes/manifests
 
+mkdir -p kubernetes/builds/systemd
+
 # systemd version
 fpm -s dir -n "kubernetes-master" \
 -p kubernetes/builds/systemd \

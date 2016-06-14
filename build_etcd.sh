@@ -7,16 +7,20 @@
     # --deb-upstart FILEPATH        (deb only) Add FILEPATH as an upstart script
 
 ETCD_VERSION=2.3.0
+ETCD_CLEAN_BUILD=${ETCD_CLEAN_BUILD:-true}
 
-rm -rf etcd/source
-mkdir etcd/source
-rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
-rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
-rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
-rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+if [[ "${ETCD_CLEAN_BUILD}" != "false" ]]; then
+  rm -rf etcd/source
+  mkdir etcd/source
+  rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+  rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+  rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+  rm -f etcd/builds/etcd-$ETCD_VERSION-1.x86_64.rpm
+fi
 
-
-curl -L  https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$ETCD_VERSION-linux-amd64.tar.gz | tar xvz -C etcd/source --strip-components 1
+curl -L -O https://github.com/coreos/etcd/releases/download/v$ETCD_VERSION/etcd-v$ETCD_VERSION-linux-amd64.tar.gz -z etcd-v$ETCD_VERSION-linux-amd64.tar.gz
+mkdir -p etcd/source
+tar -xvzf etcd-v$ETCD_VERSION-linux-amd64.tar.gz -C etcd/source --strip-components 1
 
 fpm -s dir -n "etcd" \
 -p etcd/builds \
@@ -36,6 +40,7 @@ fpm -s dir -n "etcd" \
 source/etcd=/usr/bin/etcd \
 source/etcdctl=/usr/bin/etcdctl
 
+mkdir -p etcd/builds/systemd
 
 # systemd version - add a .0 to the version
 fpm -s dir -n "etcd" \
