@@ -18,7 +18,8 @@ ExecStart=/usr/bin/kube-apiserver \
       $KUBE_ADMISSION_CONTROL \
       $KUBE_SERVICE_ACCOUNT \
       $KUBE_API_ARGS
-Restart=on-failure
+Restart=always
+RestartSec=3
 LimitNOFILE=65536
 
 [Install]
