@@ -11,7 +11,7 @@ ExecStart=/usr/bin/kube-controller-manager \
 	    $KUBE_LOG_LEVEL \
 	    $KUBE_MASTER \
 	    $KUBE_CONTROLLER_MANAGER_ARGS
-Restart=on-failure
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

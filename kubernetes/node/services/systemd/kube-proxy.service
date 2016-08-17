@@ -10,7 +10,7 @@ ExecStart=/usr/bin/kube-proxy \
 	    $KUBE_LOG_LEVEL \
       $KUBE_MASTER_SERVER \
 	    $KUBE_PROXY_ARGS
-Restart=on-failure
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

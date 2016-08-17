@@ -11,6 +11,7 @@ StandardOutput=null
 EnvironmentFile=-/etc/etcd/etcd.conf
 User=etcd
 ExecStart=/usr/bin/etcd
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

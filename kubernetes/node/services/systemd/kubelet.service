@@ -21,7 +21,7 @@ ExecStart=/usr/bin/kubelet \
 	    $KUBELET_HOSTNAME \
 	    $KUBE_ALLOW_PRIV \
 	    $KUBELET_ARGS
-Restart=on-failure
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
