@@ -35,6 +35,7 @@ fpm -s dir -n "kubernetes-master" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
+--exclude .gitkeep \
 --after-install kubernetes/master/scripts/deb/after-install.sh \
 --before-install kubernetes/master/scripts/deb/before-install.sh \
 --after-remove kubernetes/master/scripts/deb/after-remove.sh \
@@ -42,11 +43,9 @@ fpm -s dir -n "kubernetes-master" \
 --deb-init kubernetes/master/services/initd/kube-apiserver \
 --deb-init kubernetes/master/services/initd/kube-controller-manager \
 --deb-init kubernetes/master/services/initd/kube-scheduler \
---deb-init kubernetes/master/services/initd/kubelet \
 --deb-default kubernetes/master/initd_config/kube-apiserver \
 --deb-default kubernetes/master/initd_config/kube-controller-manager \
 --deb-default kubernetes/master/initd_config/kube-scheduler \
---deb-default kubernetes/master/initd_config/kubelet \
 --license "Apache Software License 2.0" \
 --maintainer "Kismatic, Inc. <info@kismatic.com>" \
 --vendor "Kismatic, Inc." \
@@ -56,7 +55,6 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
 etc/kubernetes/manifests
 
@@ -69,6 +67,7 @@ fpm -s dir -n "kubernetes-master" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
+--exclude .gitkeep \
 --after-install kubernetes/master/scripts/deb/systemd/after-install.sh \
 --before-install kubernetes/master/scripts/deb/systemd/before-install.sh \
 --after-remove kubernetes/master/scripts/deb/systemd/after-remove.sh \
@@ -82,13 +81,10 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
-services/systemd/kubelet.service=/lib/systemd/system/kubelet.service \
-etc/kubernetes/master/kubelet.conf \
 etc/kubernetes/master/apiserver.conf \
 etc/kubernetes/master/config.conf \
 etc/kubernetes/master/controller-manager.conf \
@@ -118,6 +114,7 @@ fpm -s dir -n "kubernetes-node" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
+--exclude .gitkeep \
 --after-install kubernetes/node/scripts/deb/after-install.sh \
 --before-install kubernetes/node/scripts/deb/before-install.sh \
 --after-remove kubernetes/node/scripts/deb/after-remove.sh \
@@ -143,6 +140,7 @@ fpm -s dir -n "kubernetes-node" \
 -t deb \
 -a amd64 \
 -d "dpkg (>= 1.17)" \
+--exclude .gitkeep \
 --after-install kubernetes/node/scripts/deb/systemd/after-install.sh \
 --before-install kubernetes/node/scripts/deb/systemd/before-install.sh \
 --after-remove kubernetes/node/scripts/deb/systemd/after-remove.sh \
@@ -171,6 +169,7 @@ fpm -s dir -n "kubernetes-master" \
 -C ./kubernetes/master -v $K8S_VERSION \
 -d 'docker-engine >= 1.7.0' \
 -t rpm --rpm-os linux \
+--exclude .gitkeep \
 -a x86_64 \
 --after-install kubernetes/master/scripts/rpm/after-install.sh \
 --before-install kubernetes/master/scripts/rpm/before-install.sh \
@@ -186,13 +185,10 @@ fpm -s dir -n "kubernetes-master" \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-controller-manager=/usr/bin/kube-controller-manager \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kube-scheduler=/usr/bin/kube-scheduler \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubectl=/usr/bin/kubectl \
-../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/kubelet=/usr/bin/kubelet \
 ../source/kubernetes/v$K8S_VERSION/kubernetes/server/bin/hyperkube=/usr/bin/hyperkube \
 services/systemd/kube-apiserver.service=/lib/systemd/system/kube-apiserver.service \
 services/systemd/kube-controller-manager.service=/lib/systemd/system/kube-controller-manager.service \
 services/systemd/kube-scheduler.service=/lib/systemd/system/kube-scheduler.service \
-services/systemd/kubelet.service=/lib/systemd/system/kubelet.service \
-etc/kubernetes/master/kubelet.conf \
 etc/kubernetes/master/apiserver.conf \
 etc/kubernetes/master/config.conf \
 etc/kubernetes/master/controller-manager.conf \
@@ -206,6 +202,7 @@ fpm -s dir -n "kubernetes-node" \
 -d 'docker-engine >= 1.7.0' \
 -a x86_64 \
 -t rpm --rpm-os linux \
+--exclude .gitkeep \
 --after-install kubernetes/node/scripts/rpm/after-install.sh \
 --before-install kubernetes/node/scripts/rpm/before-install.sh \
 --after-remove kubernetes/node/scripts/rpm/after-remove.sh \
